@@ -1,8 +1,19 @@
 import phaser from 'phaser';
 
+let game;
+let score;
+let scoreText;
+let balloonScoreText;
+let balloonsRemainingText;
+let balloonsRemaining;
+let amountToDonate;
+
 export default function initBalloonDarts(){
-  const score = 0;
-  const game = new phaser.Game({
+  score = 0;
+  balloonsRemaining = 5;
+  amountToDonate = 0;
+
+  game = new phaser.Game({
     parent: 'gamecanvas',
     width: 800,
     height: 500,
@@ -45,6 +56,9 @@ function preload(){
 
 function create(){
   this.add.image(400, 250, 'background');
+  scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '24px', fill: '#000' })
+  balloonsRemainingText = this.add.text(450, 16, 'Balloons Remaining: 3', { fontSize: '24px', fill: '#000' })
+  balloonScoreText = this.add.text(810, 0, '', { fontSize: '32px', fill: '#000' })
   // add balloons
   // top row
   this.add.sprite(160, 125, 'green-balloon');
@@ -75,10 +89,20 @@ function update(){
 
 }
 
-function balloonClicked(pointer, balloon){
-  console.log('clicked on a balloon', balloon.getData('value'));
+function generateFeedBack(){
+  console.log('generating the donation amount');
+  amountToDonate = 5;
+  return `not bad, you are donating $${amountToDonate}`;
+}
 
+function balloonClicked(pointer, balloon){
+  console.log('clicked balloon', balloon)
+  const balloonScore = balloon.getData('value')
   if(balloon.type === 'Sprite'){
+    score += balloonScore;
+    balloonsRemaining -= 1;
+    balloonsRemainingText.setText('Balloons Remaining: ' + balloonsRemaining);
+    scoreText.setText('Score: ' + score);
     setTimeout(() => {
       balloon.setFrame(1);
     }, 100);
@@ -87,10 +111,21 @@ function balloonClicked(pointer, balloon){
     }, 200);
     setTimeout(() => {
       balloon.destroy();
+      balloonScoreText.setText('+' + balloonScore);
+      balloonScoreText.setX(balloon.x);
+      balloonScoreText.setY(balloon.y);
+      setTimeout(() => {
+        balloonScoreText.setX(810)
+        if(balloonsRemaining === 0){
+          game.scene.keys.default.add.image(400, 250, 'background');
+          game.scene.keys.default.add.text(120, 150, `You finished with a score of ${score}!`, { fontSize: '28px', fill: '#000' });
+          game.scene.keys.default.add.text(120, 200, generateFeedBack(), { fontSize: '28px', fill: '#000' });
+          const playAgain = game.scene.keys.default.add.text(120, 250, 'Click to play again', { fontSize: '28px', fill: '#000' });
+          playAgain.setInteractive();
+        }
+      }, 500)
     }, 300);
-    setTimeout(() => {
-      console.log(this.manager.game)
-      // this.manager.game.add.text(balloon.x, balloon.y, 'POP', { color: '#00ff00' });
-    }, 400);
+  } else if (balloon.text === 'Click to play again') {
+    initBalloonDarts();
   }
 }
