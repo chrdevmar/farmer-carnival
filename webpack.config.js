@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
   entry: './client/src/index.js',
   output: {
+    libraryTarget: 'umd',
   // options related to how webpack emits results
   path: path.resolve(__dirname, "client/dist"), // string
   // the target directory for all output files
