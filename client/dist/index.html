@@ -2,11 +2,38 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Famer Carnival</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script type="text/javascript" src="dist/bundle.js"></script>
   </head>
   <body>
-    <div id="root"></div>
-    <h1>Farmer Carnival</h1>
-    <script type="text/javascript" src="dist/bundle.js"></script>
+    <div class="text-center">
+      <h1>Farmer Carnival</h1>
+    </div>
+    <!-- <div class="row">
+      <div class="col-md-6">
+        Remaining Balance: <span id="remainingBalance"></span>
+      </div>
+    </div> -->
+    <div id="gameelements">
+      <div class="row text-center">
+        <div class="col-md-4">
+          <button class="btn btn-primary" onclick="balloonDarts()">
+            Balloon Darts
+          </button>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-success" onclick="bigWheel()">
+            Big Wheel
+          </button>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-warning" onclick="clowns()">
+            Clowns
+          </button>
+        </div>
+      </div>
+      <div class="text-center" style="margin-top: 20px" id="gamecanvas"></div>
+    </div>
   </body>
 </html>

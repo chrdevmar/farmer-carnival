@@ -1,27 +1,29 @@
-import Phaser from 'phaser';
+import phaser from 'phaser';
 
-const config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 600,
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
-};
+import initBalloonDarts from './balloons/balloons';
+import initBigWheel from './wheel/wheel';
+import initClowns from './clowns/clowns';
 
-const game = new Phaser.Game(config);
-console.log('game instance', game);
+let game;
 
-function preload ()
-{
+export function balloonDarts() {
+  if(game){
+    game.destroy()
+    game = null;
+  }
+  initBalloonDarts();
 }
-
-function create ()
-{
+export function bigWheel() {
+  if(game){
+    game.destroy()
+    game = null;
+  }
+  initBigWheel();
 }
-
-function update ()
-{
+export function clowns() {
+  if(game){
+    game.destroy()
+    game = null;
+  }
+  initClowns();
 }
