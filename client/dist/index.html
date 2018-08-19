@@ -22,7 +22,7 @@
         <div class="col-md-6 form-container">
           <h1>Don't hate. Donate.</h1>
           <p class="sub-heading">Play a game, so the farmers can grow some grain</p>
-          <form action="/charge" method="post" id="payment-form">
+          <form id="payment-form">
             <div class="form-row custom-row">
               <div class="col-md-6">
                 <label for="card-element">
@@ -42,7 +42,7 @@
                 Donation Pledge
               </label>
               <span class="floating-dollar-sign">$</span>
-              <input id="donationAmount" value="10" type="number" class="StripeElement StripeElement--empty dollar-input" placeholder="10">
+              <input id="donationAmount" value="10" type="number" class="StripeElement StripeElement--empty dollar-input" placeholder="10" required>
             </div>
             <div class="form-row">
               <label for="card-element">
@@ -55,37 +55,56 @@
               <!-- Used to display form errors. -->
               <div id="card-errors" role="alert"></div>
             </div>
-            <button id="donationButton" onclick="donate()"><i id="loading-icon" class="fas fa-circle-notch fa-spin"></i>Donate now</button>
+            <button id="donationButton" type="submit"><i id="loading-icon" class="fas fa-circle-notch fa-spin"></i>Donate now</button>
           </form>
         </div>
       </div>
     </div>
     <div id="game-elements">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <h1>Farmer Carnival</h1>
+      <div class="nav">
+          <div class="col-md-12 text-center nav-row">
+            <img src="assets/farmer-logo.png" alt="">
+            <h1>Farmer Carnival</h1>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <h2>Your balance is $<span id="remainingBalance"></span></h2>
+        <div class="grey-background">
         </div>
-      </div>
-      <div class="row text-center">
-        <div class="col-md-4">
-          <button class="btn btn-primary" onclick="balloonDarts()">
-            Balloon Darts
-          </button>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h2>Your balance is $<span id="remainingBalance"></span></h2>
+          </div>
         </div>
-        <div class="col-md-4">
-          <button class="btn btn-success" onclick="bigWheel()">
-            Big Wheel
-          </button>
-        </div>
-        <div class="col-md-4">
-          <button class="btn btn-warning" onclick="clowns()">
-            Clowns
-          </button>
+        <div class="row text-center cards-container">
+          <div class="col-md-4 game-card-container">
+            <div class="game-card">
+              <img src="assets/balloons.png" alt="">
+              <h3>Balloon Darts</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit iusto nisi deleniti temporibus a dicta omnis illum aspernatur nulla.</p>
+              <button class="btn btn-primary" onclick="balloonDarts()">
+                Play game now
+              </button>
+            </div>
+          </div>
+          <div class="col-md-4 game-card-container">
+            <div class="game-card">
+              <img src="assets/cow.png" alt="">
+              <h3>Catch the Cow</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit iusto nisi deleniti temporibus a dicta omnis illum aspernatur nulla.</p>
+              <button class="btn btn-success" onclick="bigWheel()">
+                Play game now
+              </button>
+            </div>
+          </div>
+          <div class="col-md-4 game-card-container">
+            <div class="game-card">
+              <img src="assets/dice.png" alt="">
+              <h3>Dice</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit iusto nisi deleniti temporibus a dicta omnis..</p>
+              <button class="btn btn-warning" onclick="clowns()">
+                Play game now
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div class="text-center" style="margin-top: 20px" id="gamecanvas"></div>

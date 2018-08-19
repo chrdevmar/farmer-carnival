@@ -22,8 +22,6 @@ export function clowns() {
   initClowns();
 }
 
-
-
 export function donate() {
   var donationAmount = Number(document.getElementById('donationAmount').value)
   axios.post('http://localhost:8000/commit', {
@@ -73,10 +71,13 @@ export function initSession() {
 
   if (sessionStatus.isValid === false) {
     document.getElementById("game-elements").style.display = "none";
+    document.getElementById("my-balance").style.display = "none";
     document.getElementById("page-container").style.display = "block";
     document.getElementById('donationButton').innerHTML = "Donate now";
   } else {
     document.getElementById("game-elements").style.display = "block";
+    document.getElementById("my-balance").style.position = "fixed";
+    document.getElementById("my-balance").style.display = "initial";
     document.getElementById("page-container").style.display = "none";
     document.getElementById("remainingBalance").innerText = sessionStatus.balance.balance
   }
