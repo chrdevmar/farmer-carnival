@@ -62,10 +62,11 @@ form.addEventListener('submit', function(event) {
       })
         .then(function (response) {
           window.localStorage.setItem('farmerToken', response.data)
-          document.getElementById('donationButton').innerHTML = "Thank you for donating, your games will begin shortly..";
+          document.getElementById('donationButton').innerHTML = '<i id="loading-icon" class="fas fa-circle-notch fa-spin"></i>Thank you for your donation...';
+          document.getElementById('loading-icon').style.display = "inherit";
           setTimeout(() => {
             initSession();
-          }, 2000)
+          }, 4000)
         })
         .catch(function (error) {
           console.log(error);

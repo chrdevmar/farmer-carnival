@@ -61,29 +61,51 @@
       </div>
     </div>
     <div id="game-elements">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <h1>Farmer Carnival</h1>
+      <div class="nav">
+          <div class="col-md-12 text-center nav-row">
+            <img src="assets/farmer-logo.png" alt="">
+            <h1>Farmer Carnival</h1>
+          </div>
         </div>
-      </div>
-      <div class="row text-center">
-        <div class="col-md-4">
-          <button class="btn btn-primary" onclick="balloonDarts()">
-            Balloon Darts
-          </button>
+        <div class="grey-background">
         </div>
-        <div class="col-md-4">
-          <button class="btn btn-success" onclick="bigWheel()">
-            Big Wheel
-          </button>
-        </div>
-        <div class="col-md-4">
-          <button class="btn btn-warning" onclick="clowns()">
-            Clowns
-          </button>
+        <div class="row text-center cards-container">
+          <div class="col-md-4 game-card-container">
+            <div class="game-card">
+              <img src="assets/balloons.png" alt="">
+              <h3>Balloon Darts</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit iusto nisi deleniti temporibus a dicta omnis illum aspernatur nulla.</p>
+              <button class="btn btn-primary" onclick="balloonDarts()">
+                Play game now
+              </button>
+            </div>
+          </div>
+          <div class="col-md-4 game-card-container">
+            <div class="game-card">
+              <img src="assets/cow.png" alt="">
+              <h3>Catch the Cow</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit iusto nisi deleniti temporibus a dicta omnis illum aspernatur nulla.</p>
+              <button class="btn btn-success" onclick="bigWheel()">
+                Play game now
+              </button>
+            </div>
+          </div>
+          <div class="col-md-4 game-card-container">
+            <div class="game-card">
+              <img src="assets/dice.png" alt="">
+              <h3>Dice</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit iusto nisi deleniti temporibus a dicta omnis..</p>
+              <button class="btn btn-warning" onclick="clowns()">
+                Play game now
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div class="text-center" style="margin-top: 20px" id="gamecanvas"></div>
+    </div>
+    <div id="my-balance" class="donation-balance">
+      <p>My Balance: $10</p>
     </div>
     <script type="text/javascript" src="dist/stripe.js"></script>
   </body>

@@ -113,6 +113,10 @@ html, body, #page-container, .page-row {
   outline: none;
 }
 
+#payment-form button:hover #loading-icon {
+  color: white;
+}
+
 .floating-dollar-sign {
   position: absolute;
     top: 472px;
@@ -128,4 +132,91 @@ html, body, #page-container, .page-row {
 #loading-icon {
   margin-right: 10px;
   display: none;
+}
+
+.nav {
+  background-color: #FB5A5A;
+  color: white;
+  padding: 25px;
+}
+
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav img {
+  max-height: 50px;
+  margin-right: 30px;
+}
+
+.nav h1 {
+  margin-bottom: 0px;
+  font-weight: 200;
+}
+
+.grey-background {
+  background-color: #fafafa;
+  padding: 150px;
+}
+
+.cards-container {
+  padding: 0px 200px;
+}
+
+.game-card-container {
+  margin-top: -200px;
+}
+
+.game-card {
+  background-color: white;
+  padding: 30px;
+  -webkit-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.14);
+  -moz-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.14);
+  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.14);
+}
+
+.game-card h3, .game-card p {
+  margin-bottom: 50px;
+}
+
+.game-card p {
+  min-height: 100px;
+}
+
+.game-card button, .game-card button:hover, .game-card button:active, .game-card button:focus {
+  width: 100%;
+  background-color: #FB5A5A;
+  color: white;
+  border-color: #FB5A5A !important;
+  padding: 15px;
+  outline-color: #FB5A5A;
+  outline: none !important;
+  box-shadow: none;
+}
+
+.game-card img {
+  max-height: 100px;
+  margin-bottom: 50px;
+}
+
+.donation-balance {
+  position: fixed;
+  background-color: #FB5A5A;
+  color: white;
+  right: 200px;
+  bottom: 50px;
+  padding: 20px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.14);
+  -moz-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.14);
+  box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.14);
+}
+
+.donation-balance p {
+  margin-bottom: 0px;
 }
