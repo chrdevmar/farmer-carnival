@@ -33,7 +33,32 @@ app.post('/commit', (req, res) => {
 })
 
 app.post('/spend', (req, res) => {
-
+  try {
+    // Decode the JWT token
+    var verifiedToken = jwt.verify(req.body.token, process.env.SECRET_KEY);
+    // Prevent negative or 0 values
+    if(req.body.amount <= 0) {
+      res.status(500).send({
+        "error": "Subtracted amount cannot be less than 1"
+      })
+      return;
+    }
+    // Subtract the amount spent from the user's current balance
+    var newBalance = verifiedToken.balance - req.body.amount;
+    // Generate & send new token with updated balance
+    var token = jwt.sign({
+      balance: newBalance
+    }, process.env.SECRET_KEY,
+    {
+      expiresIn: "2h"
+    })
+    res.send(token);
+  } catch(err) {
+    res.status(500).send({
+      "error": err
+    })
+    return;
+  }
 })
 
 app.listen(8000);
