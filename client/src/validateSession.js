@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-export default function(){
+export default function validateSession(){
   console.log('validating session');
   const token = window.localStorage.getItem('farmerToken');
   if(!token){
@@ -10,6 +10,7 @@ export default function(){
   }
   try {
     const balanceData = jwt.verify(token)
-    if()
+  } catch (err) {
+    console.log(err);
   }
 }
