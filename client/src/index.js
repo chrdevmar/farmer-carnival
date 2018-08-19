@@ -55,13 +55,19 @@ export function donate() {
 }
 
 export function spend(amount){
-  return axios.post('http//localhost:8000/spend', {
-    amount
+  const token = window.localStorage.getItem('farmerToken');
+  const currentToken = jwt.verify(token, 'farmercarnival');
+  console.log('current token before spending is', currentToken);
+  axios.post('http://localhost:8000/spend', {
+    amount,
+    token
   })
-  .then(({token}) => {
-    const balanceData = jwt.verify(token, 'farmercarnival');
+  .then(({data}) => {
+    console.log('spend response', data)
+    window.localStorage.setItem('farmerToken', data);
+    const balanceData = jwt.verify(data, 'farmercarnival');
     console.log('got the balance', balanceData);
-    document.getElementById('#remainingBalance').innerText = balanceData.balance;
+    document.getElementById('remainingBalance').innerText = balanceData.balance;
   })
   .catch((error) => {
     console.log('error spending', error)
@@ -72,13 +78,12 @@ export function initSession() {
 
   const sessionStatus = validateSession();
 
-  console.log('validation status', sessionStatus);
   if (sessionStatus.isValid === false) {
     document.getElementById("game-elements").style.display = "none";
     document.getElementById("page-container").style.display = "block";
   } else {
-    console.log('showing the games')
     document.getElementById("game-elements").style.display = "block";
     document.getElementById("page-container").style.display = "none";
+    document.getElementById("remainingBalance").innerText = sessionStatus.balance.balance
   }
 }
