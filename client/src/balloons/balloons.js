@@ -8,11 +8,21 @@ let balloonScoreText;
 let balloonsRemainingText;
 let balloonsRemaining;
 let amountToDonate;
+let webglTexture;
 
 export default function initBalloonDarts(){
   score = 0;
   balloonsRemaining = 5;
   amountToDonate = 0;
+
+  const element = document.getElementById('gamecanvas');
+  const canvas = element.children[0];
+  if(canvas){
+    const webgl = canvas.getContext('webgl');
+    // webgl.deleteTexture(webglTexture);
+    console.log('webgl context', webgl)
+    canvas.remove()
+  }
 
   game = new phaser.Game({
     parent: 'gamecanvas',
@@ -118,7 +128,7 @@ function balloonClicked(pointer, balloon){
         balloonsRemainingText.setText('Balloons Remaining: ' + balloonsRemaining);
         balloonScoreText.setX(810)
         if(balloonsRemaining === 0){
-          console.log('GAME OVER');
+          webglTexture = game.renderer.currentTextures[0]
           game.scene.keys.default.add.image(400, 250, 'background');
           game.scene.keys.default.add.text(120, 150, `You finished with a score of ${score}!`, { fontSize: '28px', fill: '#000' });
           game.scene.keys.default.add.text(120, 200, generateFeedBack(), { fontSize: '28px', fill: '#000' });

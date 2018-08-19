@@ -55,7 +55,7 @@ form.addEventListener('submit', function(event) {
     } else {
       // Send the token to your server.
       //stripeTokenHandler(result.token);
-      console.log('making api call with', token)
+      console.log('making api call with', result)
     }
   });
 });

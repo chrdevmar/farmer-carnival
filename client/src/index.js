@@ -9,44 +9,32 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 
 
-const game = document.getElementsByTagName('canvas');
 
 export function balloonDarts() {
-  if (game.length) {
-    game[0].remove();
-  }
   initBalloonDarts();
 }
 
 export function bigWheel() {
-  if (game.length) {
-    game[0].remove();
-  }
   initBigWheel();
 }
 
 export function clowns() {
-  if (game.length) {
-    game[0].remove();
-  }
   initClowns();
 }
 
 
 
 export function donate() {
-  var donationAmount = document.getElementById('donationAmount').value
+  var donationAmount = Number(document.getElementById('donationAmount').value)
   axios.post('http://localhost:8000/commit', {
     "balance": donationAmount
   })
     .then(function (response) {
       window.localStorage.setItem('farmerToken', response.data)
-      initSession();
       console.log(response.data);
       document.getElementById('donationButton').innerHTML = "Thank you for donating, your games will begin shortly..";
-      document.getElementById('loading-icon').style.display = "visible";
-      document.getElementById('loading-icon').style.color = "white";
       setTimeout(() => {
+        initSession();
       }, 3000)
     })
     .catch(function (error) {
@@ -67,6 +55,11 @@ export function spend(amount){
     window.localStorage.setItem('farmerToken', data);
     const balanceData = jwt.verify(data, 'farmercarnival');
     console.log('got the balance', balanceData);
+    if(Number(balanceData.balance) < 1){
+      console.log('ran out of balance');
+      document.getElementById('out-of-balance').style.display = 'block';
+      document.getElementById('game-elements').style.display = 'none';
+    }
     document.getElementById('remainingBalance').innerText = balanceData.balance;
   })
   .catch((error) => {
@@ -81,6 +74,7 @@ export function initSession() {
   if (sessionStatus.isValid === false) {
     document.getElementById("game-elements").style.display = "none";
     document.getElementById("page-container").style.display = "block";
+    document.getElementById('donationButton').innerHTML = "Donate now";
   } else {
     document.getElementById("game-elements").style.display = "block";
     document.getElementById("page-container").style.display = "none";
