@@ -1,0 +1,122 @@
+html, body, #page-container, .page-row {
+  height: 100%;
+}
+
+.banner {
+  background-color: #FB5A5A;
+  color: white;
+  padding-top: 300px;
+  padding-left: 100px !important;
+  padding-right: 150px !important;
+}
+
+.banner img {
+  max-height: 200px;
+  margin-bottom: 20px;
+}
+
+.banner h2 {
+  margin-bottom: 20px !important;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 200px;
+  padding-left: 150px !important;
+  padding-right: 150px !important;
+}
+
+.form-container h1 {
+  margin-bottom: 20px;
+}
+
+.form-container .sub-heading {
+  margin-bottom: 40px;
+}
+
+.donation-form {
+  width: 100%;
+  padding: 0px 50px;
+}
+
+.has-float-label {
+  margin: 20px 0px;
+}
+
+.has-float-label input {
+  width: 100%;
+}
+
+#game-elements {
+  display: none;
+}
+
+#payment-form {
+  width: 100%;
+}
+
+#card-element {
+  width: 100%;
+}
+
+.StripeElement {
+  background-color: white;
+  height: 40px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+
+.custom-row input {
+  width: 100%;
+  margin-bottom: 30px;
+  outline: none;
+}
+
+#payment-form button {
+  margin-top: 30px;
+  width: 100%;
+  padding: 15px;
+  border-radius: 50px;
+  border-color: #FB5A5A;
+  background-color: white;
+  color: #FB5A5A;
+  cursor: pointer;
+  outline: none;
+}
+
+#payment-form button:hover {
+  background-color: #FB5A5A;
+  border-color: #FB5A5A;
+  color: white;
+  outline: none;
+}
+
+.floating-dollar-sign {
+  position: absolute;
+    top: 472px;
+    left: 300;
+    left: 160px;
+    color: gray;
+}
+
+.dollar-input {
+  padding-left: 30px;
+}
