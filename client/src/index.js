@@ -43,6 +43,11 @@ export function donate() {
   })
     .then(function (response) {
       console.log(response.data);
+      document.getElementById('donationButton').innerHTML = "Thank you for donating, your games will begin shortly..";
+      document.getElementById('loading-icon').style.display = "visible";
+      document.getElementById('loading-icon').style.color = "white";
+      setTimeout(() => {
+      }, 3000)
     })
     .catch(function (error) {
       console.log(error);

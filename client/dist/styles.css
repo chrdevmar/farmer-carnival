@@ -120,3 +120,8 @@ html, body, #page-container, .page-row {
 .dollar-input {
   padding-left: 30px;
 }
+
+#loading-icon {
+  margin-right: 10px;
+  display: none;
+}
