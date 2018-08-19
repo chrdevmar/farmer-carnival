@@ -1,5 +1,5 @@
 import phaser from 'phaser';
-import spend from '../';
+import {spend} from '../index';
 
 let game;
 let score;
@@ -89,8 +89,6 @@ function create(){
 function update(){
 
 }
-
-
 
 function generateFeedBack(){
   console.log('generating feedback for ', score)

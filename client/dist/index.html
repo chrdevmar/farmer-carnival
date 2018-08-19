@@ -22,7 +22,7 @@
         <div class="col-md-6 form-container">
           <h1>Don't hate. Donate.</h1>
           <p class="sub-heading">Play a game, so the farmers can grow some grain</p>
-          <form action="/charge" method="post" id="payment-form">
+          <form id="payment-form">
             <div class="form-row custom-row">
               <div class="col-md-6">
                 <label for="card-element">
@@ -42,7 +42,7 @@
                 Donation Pledge
               </label>
               <span class="floating-dollar-sign">$</span>
-              <input id="donationAmount" type="number" class="StripeElement StripeElement--empty dollar-input" placeholder="10">
+              <input id="donationAmount" type="number" class="StripeElement StripeElement--empty dollar-input" placeholder="10" required>
             </div>
             <div class="form-row">
               <label for="card-element">
@@ -55,14 +55,18 @@
               <!-- Used to display form errors. -->
               <div id="card-errors" role="alert"></div>
             </div>
-            <button id="donationButton" onclick="donate()"><i id="loading-icon" class="fas fa-circle-notch fa-spin"></i>Donate now</button>
+            <button id="donationButton" type="submit"><i id="loading-icon" class="fas fa-circle-notch fa-spin"></i>Donate now</button>
           </form>
         </div>
       </div>
     </div>
     <div id="game-elements">
       <div class="nav">
-        <h1>Farmer Carnival</h1>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h1>Farmer Carnival</h1>
+          </div>
+        </div>
       </div>
       <div class="grey-background">
       </div>

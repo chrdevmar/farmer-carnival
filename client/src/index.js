@@ -32,8 +32,6 @@ export function clowns() {
   initClowns();
 }
 
-
-
 export function donate() {
   var donationAmount = document.getElementById('donationAmount').value
   axios.post('http://localhost:8000/commit', {
