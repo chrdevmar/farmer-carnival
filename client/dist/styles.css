@@ -303,6 +303,14 @@ html, body, #page-container, .page-row {
 }
 
 #cowField {
-  background: url('http://3.bp.blogspot.com/-qmMuP807LNU/T-nK_uahv7I/AAAAAAAAADc/UJ3xNjjQs6M/s1600/Wall+AB.png');
+  width: 800px;
+  height: 500px;
+  background: url('https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/S15GBCm/nice-cartoon-animation-of-colorful-farm-background-seamless-loop-with-space-for-your-text-or-logo-wheat-filed-over-sunburst-full-hd-and-4k-illustration-of-a-beautiful-autumn-scene-with-wheat-fields_s8m2mirr_thumbnail-full01.png');
   background-size: cover;
+}
+
+#gameOver {
+  font-size: 24px;
+  font-weight: bold;
+  color: rgba(0,0,0,0.60)
 }

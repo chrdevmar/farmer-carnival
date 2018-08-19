@@ -35,7 +35,7 @@ export function donate() {
       document.getElementById('donationButton').innerHTML = "Thank you for donating, your games will begin shortly..";
       setTimeout(() => {
         initSession();
-      }, 1500)
+      }, 500)
     })
     .catch(function (error) {
       console.log(error);

@@ -214,7 +214,7 @@
       <div class="text-center" style="margin-top: 20px" id="gamecanvas">
       </div>
       <div class="container-fluid text-center" id="cow" style="margin-top: 20px; display: none;">
-        <center>Test your skill. How many times can you catch the cow in 10 seconds?</center>
+        <center><h5>Test your skill. How many times can you catch the cow in 10 seconds?</h5></center>
         <form name="cpanel">
           <center>
             <table cellspacing=3>
@@ -225,7 +225,7 @@
                 </td>
                 <td align=right>Time:</td>
                 <td>
-                  <input type="text" class="form-control" placeholder="Time Left" name="timeleft" size="4" onFocus="this.blur()"></td>
+                  <input type="text" class="form-control" name="timeleft" size="4" onFocus="this.blur()"></td>
                 </tr>
                 <tr>
                   <td><input type="text" class="form-control" name="state" size="20" value="Push Start to Play" onFocus="this.blur()"></td>
@@ -239,7 +239,7 @@
                 </table>
               </center>
             </form>
-            <form name="dmz">
+            <form name="dmz" id="catchACow">
               <center>
                 <table cellspacing=3 id="cowField">
                   <tr>
