@@ -1,5 +1,5 @@
 import phaser from 'phaser';
-import spend from '../index';
+import { spend } from '../index';
 
 let game;
 let score;

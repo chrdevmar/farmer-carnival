@@ -2,7 +2,7 @@ import phaser from 'phaser';
 
 import initBalloonDarts from './balloons/balloons';
 import initBigWheel from './wheel/wheel';
-import initClowns from './clowns/clowns';
+import initCatchACow from './catch-a-cow';
 import validateSession from './validateSession';
 import axios from 'axios';
 
@@ -10,6 +10,7 @@ import jwt from 'jsonwebtoken';
 
 
 const game = document.getElementsByTagName('canvas');
+const cow = document.getElementById('cow');
 
 export function balloonDarts() {
   if (game.length) {
@@ -25,11 +26,11 @@ export function bigWheel() {
   initBigWheel();
 }
 
-export function clowns() {
+export function catchACow() {
   if (game.length) {
     game[0].remove();
   }
-  initClowns();
+  initCatchACow();
 }
 
 export function spend(amount){
