@@ -96,7 +96,6 @@ function generateFeedBack(){
 }
 
 function balloonClicked(pointer, balloon){
-  console.log('clicked balloon', balloon)
   const balloonScore = balloon.getData('value')
   if(balloon.type === 'Sprite'){
     score += balloonScore;
