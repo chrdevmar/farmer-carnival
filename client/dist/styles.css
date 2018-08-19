@@ -113,6 +113,10 @@ html, body, #page-container, .page-row {
   outline: none;
 }
 
+#payment-form button:hover #loading-icon {
+  color: white;
+}
+
 .floating-dollar-sign {
   position: absolute;
     top: 472px;
@@ -187,7 +191,8 @@ html, body, #page-container, .page-row {
   color: white;
   border-color: #FB5A5A;
   padding: 15px;
-  outline: none;
+  outline-color: #FB5A5A;
+  outline: none !important;
 }
 
 .game-card img {
