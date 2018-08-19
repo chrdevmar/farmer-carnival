@@ -32,28 +32,6 @@ export function clowns() {
   initClowns();
 }
 
-
-
-export function donate() {
-  var donationAmount = document.getElementById('donationAmount').value
-  axios.post('http://localhost:8000/commit', {
-    "balance": donationAmount
-  })
-    .then(function (response) {
-      window.localStorage.setItem('farmerToken', response.data)
-      initSession();
-      console.log(response.data);
-      document.getElementById('donationButton').innerHTML = "Thank you for donating, your games will begin shortly..";
-      document.getElementById('loading-icon').style.display = "visible";
-      document.getElementById('loading-icon').style.color = "white";
-      setTimeout(() => {
-      }, 3000)
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-}
-
 export function spend(amount){
   return axios.post('http//localhost:8000/spend', {
     amount

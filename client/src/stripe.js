@@ -1,3 +1,4 @@
+import axios from 'axios';
 console.log('stripe script loaded');
 // Create a Stripe client.
 var stripe = Stripe('pk_test_tc2ZIjM9l97cZEYO1oiyfXWP');
@@ -55,7 +56,20 @@ form.addEventListener('submit', function(event) {
     } else {
       // Send the token to your server.
       //stripeTokenHandler(result.token);
-      console.log('making api call with', token)
+      var donationAmount = document.getElementById('donationAmount').value
+      axios.post('http://localhost:8000/commit', {
+        "balance": donationAmount
+      })
+        .then(function (response) {
+          window.localStorage.setItem('farmerToken', response.data)
+          document.getElementById('donationButton').innerHTML = "Thank you for donating, your games will begin shortly..";
+          setTimeout(() => {
+            initSession();
+          }, 2000)
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   });
 });
