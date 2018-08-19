@@ -65,8 +65,21 @@ html, body, #page-container, .page-row {
   width: 100%;
 }
 
-#out-of-balance{
+#out-of-balance {
   display: none;
+  padding-top: 370px;
+}
+
+#out-of-balance img {
+  max-height: 100px;
+}
+
+#out-of-balance button {
+  width: 25%;
+  padding: 15px;
+  color: white;
+  background-color: #FB5A5A;
+  border-color: #FB5A5A;
 }
 
 .StripeElement {

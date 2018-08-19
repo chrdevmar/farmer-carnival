@@ -57,6 +57,7 @@ export function spend(amount){
       console.log('ran out of balance');
       document.getElementById('out-of-balance').style.display = 'block';
       document.getElementById('game-elements').style.display = 'none';
+      document.getElementById('gamecanvas').style.display = 'none';
     }
     document.getElementById('remainingBalance').innerText = balanceData.balance;
   })
@@ -74,11 +75,13 @@ export function initSession() {
     document.getElementById("my-balance").style.display = "none";
     document.getElementById("page-container").style.display = "block";
     document.getElementById('donationButton').innerHTML = "Donate now";
+    document.getElementById('out-of-balance').style.display = 'none';
   } else {
     document.getElementById("game-elements").style.display = "block";
     document.getElementById("my-balance").style.position = "fixed";
     document.getElementById("my-balance").style.display = "initial";
     document.getElementById("page-container").style.display = "none";
+    document.getElementById("gamecanvas").style.display = "block";
     document.getElementById("remainingBalance").innerText = sessionStatus.balance.balance
   }
 }
