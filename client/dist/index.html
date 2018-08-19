@@ -21,21 +21,8 @@
         <div class="col-md-6 form-container">
           <h1>Donation for our farmers</h1>
           <p class="sub-heading">Play a game, so the farmers can grow some grain</p>
-          <form action="/charge" method="post" id="payment-form">
-            <div class="form-row">
-              <label for="card-element">
-                Credit or debit card
-              </label>
-              <div id="card-element">
-                <!-- A Stripe Element will be inserted here. -->
-              </div>
-
-              <!-- Used to display form errors. -->
-              <div id="card-errors" role="alert"></div>
-            </div>
-
-            <button>Submit Payment</button>
-          </form>
+          <input type="text" id="donationAmount" value=""/>
+          <button type="button" onclick="donate()" name="button">Commit Amount</button>
           <!-- <form action="/charge" method="post" id="payment-form">
 
             <button>Submit Payment</button>
@@ -75,27 +62,32 @@
           </form> -->
         </div>
       </div>
-      <div id="game-elements">
-        <div class="row text-center">
-          <div class="col-md-4">
-            <button class="btn btn-primary" onclick="balloonDarts()">
-              Balloon Darts
-            </button>
-          </div>
-          <div class="col-md-4">
-            <button class="btn btn-success" onclick="bigWheel()">
-              Big Wheel
-            </button>
-          </div>
-          <div class="col-md-4">
-            <button class="btn btn-warning" onclick="clowns()">
-              Clowns
-            </button>
-          </div>
-        </div>
-        <div class="text-center" style="margin-top: 20px" id="gamecanvas"></div>
-      </div>
     </div>
-    <script type="text/javascript" src="dist/stripe.js"></script>
+    <div id="game-elements">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h1>Farmer Carnival</h1>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-md-4">
+          <button class="btn btn-primary" onclick="balloonDarts()">
+            Balloon Darts
+          </button>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-success" onclick="bigWheel()">
+            Big Wheel
+          </button>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-warning" onclick="clowns()">
+            Clowns
+          </button>
+        </div>
+      </div>
+      <div class="text-center" style="margin-top: 20px" id="gamecanvas"></div>
+    </div>
+    <!-- <script type="text/javascript" src="dist/stripe.js"></script> -->
   </body>
 </html>

@@ -47,6 +47,10 @@ html, body, #page-container, .page-row {
   display: none;
 }
 
+#page-container {
+  display: none;
+}
+
 .StripeElement {
   background-color: white;
   height: 40px;

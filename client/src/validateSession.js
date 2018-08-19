@@ -9,8 +9,15 @@ export default function validateSession(){
     }
   }
   try {
-    const balanceData = jwt.verify(token)
+    const balanceData = jwt.verify(token, 'farmercarnival')
+    return {
+      isValid: true,
+      balance: balanceData
+    }
   } catch (err) {
-    console.log(err);
+    console.log('jwt error', err);
+    return {
+      isValid: false
+    }
   }
 }
