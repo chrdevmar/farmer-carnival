@@ -35,7 +35,7 @@ export function donate() {
       document.getElementById('donationButton').innerHTML = "Thank you for donating, your games will begin shortly..";
       setTimeout(() => {
         initSession();
-      }, 3000)
+      }, 1500)
     })
     .catch(function (error) {
       console.log(error);
@@ -59,6 +59,7 @@ export function spend(amount){
       console.log('ran out of balance');
       document.getElementById('out-of-balance').style.display = 'block';
       document.getElementById('game-elements').style.display = 'none';
+      document.getElementById('cow').style.display = 'none';
     }
     document.getElementById('remainingBalance').innerText = balanceData.balance;
   })
@@ -78,6 +79,7 @@ export function initSession() {
     document.getElementById('donationButton').innerHTML = "Donate now";
   } else {
     document.getElementById("game-elements").style.display = "block";
+    document.getElementById("out-of-balance").style.display = "none";
     document.getElementById("my-balance").style.position = "fixed";
     document.getElementById("my-balance").style.display = "initial";
     document.getElementById("page-container").style.display = "none";

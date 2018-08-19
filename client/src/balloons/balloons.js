@@ -17,6 +17,7 @@ export default function initBalloonDarts(){
 
   const element = document.getElementById('gamecanvas');
   const canvas = element.children[0];
+  document.getElementById('cow').style.display = 'none';
   if(canvas){
     // const webgl = canvas.getContext('webgl');
     // webgl.deleteTexture(webglTexture);
