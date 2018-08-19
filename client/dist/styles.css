@@ -189,10 +189,11 @@ html, body, #page-container, .page-row {
   width: 100%;
   background-color: #FB5A5A;
   color: white;
-  border-color: #FB5A5A;
+  border-color: #FB5A5A !important;
   padding: 15px;
   outline-color: #FB5A5A;
   outline: none !important;
+  box-shadow: none;
 }
 
 .game-card img {
