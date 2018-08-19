@@ -9,6 +9,112 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <script src="https://js.stripe.com/v3?noext"></script>
     <script type="text/javascript" src="dist/bundle.js"></script>
+
+    <script type="text/javascript">
+      gamelength=10;
+      timerID=null
+      var playing=false;
+      var numholes=6*10;
+      var currentpos=-1;
+      function clrholes() {
+      for(var k=0;k<document.dmz.elements.length;k++)
+      document.dmz.elements[k].checked=false;
+      }
+      function stoptimer() {
+      if(playing)
+      clearTimeout(timerID);
+      }
+      function showtime(remtime) {
+      document.cpanel.timeleft.value=remtime;
+      if(playing) {
+      if(remtime==0) {
+      stopgame();
+      return;
+      }
+      else {
+      temp=remtime-1;
+      timerID=setTimeout("showtime(temp)",1000);
+            }
+         }
+      }
+      function stopgame() {
+      stoptimer();
+      playing=false;
+      document.cpanel.timeleft.value=0;
+      clrholes();
+      display("Game Over");
+
+      var msg = "Game over. You're donating: ";
+      if (totalhits < 6) {
+        spend(5);
+        msg += ('$5 dollars');
+      } else if (totalhits > 5 && totalhits < 12) {
+        spend(2);
+        msg += ('$2 dollars');
+      } else {
+        spend(1);
+        msg += ('$1 dollar');
+      }
+
+      var gameOver = document.getElementById('gameOver');
+      gameOver.style.display = 'block';
+      gameOver.innerText = msg;
+      }
+      function play() {
+      var gameOver = document.getElementById('gameOver');
+      gameOver.style.display = 'none';
+      stoptimer();
+      if(playing) {
+      stopgame();
+      return;
+      }
+      playing=true;
+      clrholes();
+      totalhits=0;
+      document.cpanel.score.value=totalhits;
+      display("Playing");
+      launch();
+      showtime(gamelength);
+      }
+      function display(msg) {
+      document.cpanel.state.value=msg;
+      }
+      function launch() {
+      var launched=false;
+      while(!launched) {
+      mynum=random();
+      if(mynum!=currentpos) {
+      document.dmz.elements[mynum].checked=true;
+      currentpos=mynum;
+      launched=true;
+            }
+         }
+      }
+
+      function hithead(id) {
+      if(playing==false) {
+      clrholes();
+      display("Push Start to Play");
+      return;
+      }
+      if(currentpos!=id) {
+      totalhits+=-1;
+      document.cpanel.score.value=totalhits;
+      document.dmz.elements[id].checked=false;
+      }
+      else {
+      totalhits+=1;
+      document.cpanel.score.value=totalhits;
+      launch();
+      document.dmz.elements[id].checked=false;
+         }
+      }
+
+      function random() {
+      return(Math.floor(Math.random()*100%numholes));
+      }
+      // End -->
+      </script>
   </head>
 
   <body onload="initSession()">
@@ -77,6 +183,7 @@
             <div class="game-card">
               <img src="assets/balloons.png" alt="">
               <h3>Balloon Darts</h3>
+              <p>Pop balloons and generate a score. Each balloon that is popped will generate a random number, the higher the number, the better the score.</p>
               <button class="btn btn-primary" onclick="balloonDarts()">
                 Play game now
               </button>
@@ -86,7 +193,8 @@
             <div class="game-card">
               <img src="assets/cow.png" alt="">
               <h3>Catch the Cow</h3>
-              <button class="btn btn-success" onclick="bigWheel()">
+              <p>Catch the cow as it races around the screen in a set time limit. Catching him earns you points while missing him will lose you points</p>
+              <button class="btn btn-success" onclick="catchACow()">
                 Play game now
               </button>
             </div>
@@ -95,6 +203,7 @@
             <div class="game-card">
               <img src="assets/dice.png" alt="">
               <h3>Dice</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores laboriosam, sit repellat quasi. Dolore quibusdam ex ducimus iste modi.</p>
               <button class="btn btn-warning" onclick="clowns()">
                 Play game now
               </button>
@@ -102,7 +211,130 @@
           </div>
         </div>
       </div>
-      <div class="text-center" style="margin-top: 20px" id="gamecanvas"></div>
+      <div class="text-center" style="margin-top: 20px" id="gamecanvas">
+      </div>
+      <div class="container-fluid text-center" id="cow" style="margin-top: 20px; display: none;">
+        <center>Test your skill. How many times can you catch the cow in 10 seconds?</center>
+        <form name="cpanel">
+          <center>
+            <table cellspacing=3>
+              <tr>
+                <td><input type="button" class="btn btn-default" style="background: #FB5A5A; color: white" name="startstop" value="Start" onClick="play()"></td>
+                <td>
+                  <pre>    </pre>
+                </td>
+                <td align=right>Time:</td>
+                <td>
+                  <input type="text" class="form-control" placeholder="Time Left" name="timeleft" size="4" onFocus="this.blur()"></td>
+                </tr>
+                <tr>
+                  <td><input type="text" class="form-control" name="state" size="20" value="Push Start to Play" onFocus="this.blur()"></td>
+                  <td>
+                    <pre>    </pre>
+                  </td>
+                  <td align=right>Score:</td>
+                  <td>
+                    <input type="text" name="score" class="form-control" placeholder="0" size="4" onFocus="this.blur()"></td>
+                  </tr>
+                </table>
+              </center>
+            </form>
+            <form name="dmz">
+              <center>
+                <table cellspacing=3>
+                  <tr>
+                    <!-- <td colspan=10>
+                    <hr size=1>
+                  </td> -->
+                </tr>
+                <tr>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(0)"><span class="checkmark"></span>
+                  </label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(1)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(2)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(3)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(4)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(5)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(6)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(7)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(8)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(9)"><span class="checkmark"></span></label></td>
+                </tr>
+                <tr>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(10)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(11)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(12)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(13)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(14)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(15)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(16)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(17)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(18)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(19)"><span class="checkmark"></span></label></td>
+                </tr>
+                <tr>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(20)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(21)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(22)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(23)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(24)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(25)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(26)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(27)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(28)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(29)"><span class="checkmark"></span></label></td>
+                </tr>
+                <tr>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(30)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(31)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(32)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(33)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(34)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(35)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(36)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(37)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(38)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(39)"><span class="checkmark"></span></label></td>
+                </tr>
+                <tr>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(40)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(41)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(42)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(43)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(44)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(45)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(46)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(47)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(48)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(49)"><span class="checkmark"></span></label></td>
+                </tr>
+                <tr>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(50)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(51)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(52)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(53)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(54)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(55)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(56)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(57)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(58)"><span class="checkmark"></span></label></td>
+                  <td align="center" valign="center"><label class="container-chkbox"><input type="radio" onClick="hithead(59)"><span class="checkmark"></span></label></td>
+                </tr>
+                <tr>
+                  <!-- <td colspan=10>
+                  <hr size=1>
+                </td> -->
+              </tr>
+            </table>
+          </center>
+        </form>
+        <center>
+          <div id="gameOver" class="col-md-4 game-card-container" style="display: none;">
+            <div class="game-card">
+            </div>
+          </div>
+        </center>
+      </div>
     </div>
     <div id="out-of-balance" class="text-center">
       <img src="assets/open-wallet.png" alt="">

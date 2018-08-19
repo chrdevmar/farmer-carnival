@@ -2,13 +2,15 @@ import phaser from 'phaser';
 
 import initBalloonDarts from './balloons/balloons';
 import initBigWheel from './wheel/wheel';
-import initClowns from './clowns/clowns';
+import initCatchACow from './catch-a-cow';
 import validateSession from './validateSession';
 import axios from 'axios';
 
 import jwt from 'jsonwebtoken';
 
 
+const game = document.getElementsByTagName('canvas');
+const cow = document.getElementById('cow');
 
 export function balloonDarts() {
   initBalloonDarts();
@@ -18,8 +20,8 @@ export function bigWheel() {
   initBigWheel();
 }
 
-export function clowns() {
-  initClowns();
+export function catchACow() {
+  initCatchACow();
 }
 
 export function donate() {
@@ -33,7 +35,7 @@ export function donate() {
       document.getElementById('donationButton').innerHTML = "Thank you for donating, your games will begin shortly..";
       setTimeout(() => {
         initSession();
-      }, 3000)
+      }, 1500)
     })
     .catch(function (error) {
       console.log(error);
@@ -58,6 +60,7 @@ export function spend(amount){
       document.getElementById('out-of-balance').style.display = 'block';
       document.getElementById('game-elements').style.display = 'none';
       document.getElementById('gamecanvas').style.display = 'none';
+      document.getElementById('cow').style.display = 'none';
     }
     document.getElementById('remainingBalance').innerText = balanceData.balance;
   })
@@ -78,6 +81,7 @@ export function initSession() {
     document.getElementById('out-of-balance').style.display = 'none';
   } else {
     document.getElementById("game-elements").style.display = "block";
+    document.getElementById("out-of-balance").style.display = "none";
     document.getElementById("my-balance").style.position = "fixed";
     document.getElementById("my-balance").style.display = "initial";
     document.getElementById("page-container").style.display = "none";
