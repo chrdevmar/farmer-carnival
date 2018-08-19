@@ -49,6 +49,20 @@ export function donate() {
     });
 }
 
+export function spend(amount){
+  return axios.post('http//localhost:8000/spend', {
+    amount
+  })
+  .then(({token}) => {
+    const balanceData = jwt.verify(token, 'farmercarnival');
+    console.log('got the balance', balanceData);
+    document.getElementById('#remainingBalance').innerText = balanceData.balance;
+  })
+  .catch((error) => {
+    console.log('error spending', error)
+  })
+}
+
 export function initSession() {
 
   const sessionStatus = validateSession();

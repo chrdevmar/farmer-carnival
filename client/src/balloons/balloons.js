@@ -1,4 +1,5 @@
 import phaser from 'phaser';
+import spend from '../';
 
 let game;
 let score;
@@ -57,7 +58,7 @@ function preload(){
 function create(){
   this.add.image(400, 250, 'background');
   scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '24px', fill: '#000' })
-  balloonsRemainingText = this.add.text(450, 16, 'Balloons Remaining: 3', { fontSize: '24px', fill: '#000' })
+  balloonsRemainingText = this.add.text(450, 16, 'Balloons Remaining: 5', { fontSize: '24px', fill: '#000' })
   balloonScoreText = this.add.text(810, 0, '', { fontSize: '32px', fill: '#000' })
   // add balloons
   // top row
@@ -89,10 +90,20 @@ function update(){
 
 }
 
+
+
 function generateFeedBack(){
-  console.log('generating the donation amount');
-  amountToDonate = 5;
-  return `not bad, you are donating $${amountToDonate}`;
+  console.log('generating feedback for ', score)
+  if(score > 0 && score < 10){
+    amountToDonate = 5;
+    return `terrible, you are donating $${amountToDonate}`;
+  } else if (score >= 10 && score < 18){
+    amountToDonate = 2;
+    return `not bad, you are donating $${amountToDonate}`;
+  } else if (score >= 18){
+    amountToDonate = 1;
+    return `very well done, you are donating $${amountToDonate}`;
+  }
 }
 
 function balloonClicked(pointer, balloon){
@@ -119,12 +130,10 @@ function balloonClicked(pointer, balloon){
           game.scene.keys.default.add.image(400, 250, 'background');
           game.scene.keys.default.add.text(120, 150, `You finished with a score of ${score}!`, { fontSize: '28px', fill: '#000' });
           game.scene.keys.default.add.text(120, 200, generateFeedBack(), { fontSize: '28px', fill: '#000' });
-          const playAgain = game.scene.keys.default.add.text(120, 250, 'Click to play again', { fontSize: '28px', fill: '#000' });
-          playAgain.setInteractive();
+          game.scene.keys.default.add.text(120, 250, 'Click the \'Balloon Darts\' button to play again', { fontSize: '22px', fill: '#000' });
+          spend(amountToDonate);
         }
       }, 500)
     }, 300);
-  } else if (balloon.text === 'Click to play again') {
-    initBalloonDarts();
   }
 }
