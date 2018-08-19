@@ -65,6 +65,10 @@ html, body, #page-container, .page-row {
   width: 100%;
 }
 
+#out-of-balance{
+  display: none;
+}
+
 .StripeElement {
   background-color: white;
   height: 40px;

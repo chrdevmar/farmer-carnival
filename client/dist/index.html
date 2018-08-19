@@ -42,7 +42,7 @@
                 Donation Pledge
               </label>
               <span class="floating-dollar-sign">$</span>
-              <input id="donationAmount" type="number" class="StripeElement StripeElement--empty dollar-input" placeholder="10" required>
+              <input id="donationAmount" value="10" type="number" class="StripeElement StripeElement--empty dollar-input" placeholder="10" required>
             </div>
             <div class="form-row">
               <label for="card-element">
@@ -68,6 +68,11 @@
           </div>
         </div>
         <div class="grey-background">
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h2>Your balance is $<span id="remainingBalance"></span></h2>
+          </div>
         </div>
         <div class="row text-center cards-container">
           <div class="col-md-4 game-card-container">
@@ -104,8 +109,12 @@
       </div>
       <div class="text-center" style="margin-top: 20px" id="gamecanvas"></div>
     </div>
-    <div id="my-balance" class="donation-balance">
-      <p>My Balance: $10</p>
+    <div id="out-of-balance" class="text-center">
+      <h1>Out of balance!</h1>
+      <p>Thanks for playing, you have used up all your donation</p>
+      <button onclick="initSession()" class="btn btn-primary" type="button" name="button">
+        Donate more and keep playing
+      </button>
     </div>
     <script type="text/javascript" src="dist/stripe.js"></script>
   </body>

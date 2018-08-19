@@ -1,5 +1,5 @@
 import phaser from 'phaser';
-import {spend} from '../index';
+import { spend } from '../index';
 
 let game;
 let score;
@@ -8,11 +8,21 @@ let balloonScoreText;
 let balloonsRemainingText;
 let balloonsRemaining;
 let amountToDonate;
+let webglTexture;
 
 export default function initBalloonDarts(){
   score = 0;
   balloonsRemaining = 5;
   amountToDonate = 0;
+
+  const element = document.getElementById('gamecanvas');
+  const canvas = element.children[0];
+  if(canvas){
+    const webgl = canvas.getContext('webgl');
+    // webgl.deleteTexture(webglTexture);
+    console.log('webgl context', webgl)
+    canvas.remove()
+  }
 
   game = new phaser.Game({
     parent: 'gamecanvas',
@@ -21,13 +31,11 @@ export default function initBalloonDarts(){
     scene: {
       preload,
       create,
-      update
     }
   })
 }
 
 function preload(){
-  console.log('ballons preload function')
   this.load.image('background', './assets/carnival-sign-blank-800x500.png');
   this.load.spritesheet('red-balloon', './assets/balloon-red-spritesheet.png', {
     frameHeight:120, frameWidth:80, endFrame: 2
@@ -86,12 +94,7 @@ function create(){
   })
 }
 
-function update(){
-
-}
-
 function generateFeedBack(){
-  console.log('generating feedback for ', score)
   if(score > 0 && score < 10){
     amountToDonate = 5;
     return `terrible, you are donating $${amountToDonate}`;
@@ -108,8 +111,6 @@ function balloonClicked(pointer, balloon){
   const balloonScore = balloon.getData('value')
   if(balloon.type === 'Sprite'){
     score += balloonScore;
-    balloonsRemaining -= 1;
-    balloonsRemainingText.setText('Balloons Remaining: ' + balloonsRemaining);
     scoreText.setText('Score: ' + score);
     setTimeout(() => {
       balloon.setFrame(1);
@@ -123,8 +124,11 @@ function balloonClicked(pointer, balloon){
       balloonScoreText.setX(balloon.x);
       balloonScoreText.setY(balloon.y);
       setTimeout(() => {
+        balloonsRemaining -= 1;
+        balloonsRemainingText.setText('Balloons Remaining: ' + balloonsRemaining);
         balloonScoreText.setX(810)
         if(balloonsRemaining === 0){
+          webglTexture = game.renderer.currentTextures[0]
           game.scene.keys.default.add.image(400, 250, 'background');
           game.scene.keys.default.add.text(120, 150, `You finished with a score of ${score}!`, { fontSize: '28px', fill: '#000' });
           game.scene.keys.default.add.text(120, 200, generateFeedBack(), { fontSize: '28px', fill: '#000' });
