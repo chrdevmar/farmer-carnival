@@ -3,8 +3,10 @@ require('dotenv').config()
 const express = require('express');
 const bodyParser = require('body-parser')
 const app = express();
+const cors = require('cors');
 var jwt = require('jsonwebtoken');
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
