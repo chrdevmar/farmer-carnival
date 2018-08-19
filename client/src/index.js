@@ -68,10 +68,13 @@ export function initSession() {
   console.log('validation status', sessionStatus);
   if (sessionStatus.isValid === false) {
     document.getElementById("game-elements").style.display = "none";
+    document.getElementById("my-balance").style.display = "none";
     document.getElementById("page-container").style.display = "block";
   } else {
     console.log('showing the games')
     document.getElementById("game-elements").style.display = "block";
+    document.getElementById("my-balance").style.position = "fixed";
+    document.getElementById("my-balance").style.display = "initial";
     document.getElementById("page-container").style.display = "none";
   }
 }
